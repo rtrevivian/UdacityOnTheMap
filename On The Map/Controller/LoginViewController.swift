@@ -33,11 +33,10 @@ class LoginViewController: UIViewController {
                     usernameText.resignFirstResponder()
                     passwordText.resignFirstResponder()
                     
-                    setLoginEnabled(false)
+                    setEnabled(false)
                     
                     OTMClient.sharedInstance().getSession(username, password: password) { (result, error) -> Void in
-                        self.setLoginEnabled(true)
-                        
+                        self.setEnabled(true)
                         guard error == nil else {
                             self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                             return
@@ -68,11 +67,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func setLoginEnabled(enabled: Bool) {
-        usernameText.enabled = enabled
-        passwordText.enabled = enabled
-        loginButton.enabled = enabled
-        loginButton.alpha = enabled ? 1 : 0.5
+    func setEnabled(enabled: Bool) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.usernameText.enabled = enabled
+            self.passwordText.enabled = enabled
+            self.loginButton.enabled = enabled
+            self.loginButton.alpha = enabled ? 1 : 0.5
+        }
     }
     
     @IBAction func signUpButton(sender: UIButton) {
