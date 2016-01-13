@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var studentLocations = [StudentInformation]()
     var selectedAnnotation: MKAnnotationView!
@@ -23,11 +24,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         addNavigation()
         mapView.delegate = self
         tapGesture = UITapGestureRecognizer(target: self, action: "tap:")
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         load()
     }
     
@@ -46,7 +48,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: - Methods
     
     func load() {
+        setEnabled(false)
         OTMClient.sharedInstance().getStudentLocations { (error) -> Void in
+            self.setEnabled(true)
+            guard error == nil else {
+                self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
+                return
+            }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.mapView.removeAnnotations(self.studentLocations)
                 self.studentLocations = OTMClient.sharedInstance().studentInformations
@@ -60,6 +68,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if let studentLocation = annotation.annotation as? StudentInformation {
                 openURL(studentLocation.mediaURL!)
             }
+        }
+    }
+    
+    func setEnabled(enabled: Bool) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            enabled ? self.activityIndicator.stopAnimating() : self.activityIndicator.startAnimating()
+            self.activityIndicator.hidden = enabled
+            self.mapView.alpha = enabled ? 1 : 0.5
         }
     }
 

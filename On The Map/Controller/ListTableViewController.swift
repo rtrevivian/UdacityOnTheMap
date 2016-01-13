@@ -53,6 +53,10 @@ class ListTableViewController: UITableViewController {
     
     func load() {
         OTMClient.sharedInstance().getStudentLocations { (error) -> Void in
+            guard error == nil else {
+                self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
+                return
+            }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()

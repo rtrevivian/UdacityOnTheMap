@@ -19,8 +19,8 @@ extension OTMClient {
         OTMClient.sharedInstance().taskForPOSTMethod(method, headers: headers, parameters: parameters, removeExtraCharacters: true) { (result, error) -> Void in
             if let dictionary = result as? NSDictionary {
                 OTMClient.sharedInstance().otmSession = OTMSession(dictionary)
-                completionHandler(result: result, error: error)
             }
+            completionHandler(result: result, error: error)
         }
     }
     

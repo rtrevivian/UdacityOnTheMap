@@ -217,10 +217,15 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="me7-J4-aa1">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="quZ-97-nkd">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="quZ-97-nkd" firstAttribute="centerX" secondItem="Qdl-TS-cpO" secondAttribute="centerX" id="5px-xi-5rC"/>
                             <constraint firstItem="me7-J4-aa1" firstAttribute="top" secondItem="Qdl-TS-cpO" secondAttribute="topMargin" id="Iz0-xC-cYA"/>
+                            <constraint firstItem="quZ-97-nkd" firstAttribute="centerY" secondItem="Qdl-TS-cpO" secondAttribute="centerY" id="S5g-mR-8er"/>
                             <constraint firstAttribute="trailingMargin" secondItem="me7-J4-aa1" secondAttribute="trailing" constant="-20" id="d2s-nr-jss"/>
                             <constraint firstItem="me7-J4-aa1" firstAttribute="leading" secondItem="Qdl-TS-cpO" secondAttribute="leadingMargin" constant="-20" id="epA-fc-as5"/>
                             <constraint firstItem="me7-J4-aa1" firstAttribute="bottom" secondItem="Qdl-TS-cpO" secondAttribute="bottomMargin" id="s0C-VK-l9M"/>
@@ -228,6 +233,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="J41-SK-0Jc"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="quZ-97-nkd" id="x7M-qe-hCI"/>
                         <outlet property="mapView" destination="me7-J4-aa1" id="Jwq-rn-Gqn"/>
                     </connections>
                 </viewController>

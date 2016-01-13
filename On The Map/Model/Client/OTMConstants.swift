@@ -75,4 +75,8 @@ extension OTMClient {
         
     }
     
+    struct ErrorMessages {
+        static let tryAgain = "Please check your internet connection and try again"
+    }
+    
 }

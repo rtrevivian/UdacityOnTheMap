@@ -29,13 +29,17 @@ class LoginViewController: UIViewController {
                 } else {
                     username = usernameText.text!
                     password = passwordText.text!
-                    
+
                     usernameText.resignFirstResponder()
                     passwordText.resignFirstResponder()
                     
+                    setLoginEnabled(false)
+                    
                     OTMClient.sharedInstance().getSession(username, password: password) { (result, error) -> Void in
+                        self.setLoginEnabled(true)
+                        
                         guard error == nil else {
-                            self.presentSimpleAlert("Server error", message: "Please try again later")
+                            self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                             return
                         }
                         if let _ = result[OTMClient.UdacityKeys.status] as? Int {
@@ -47,6 +51,10 @@ class LoginViewController: UIViewController {
                             self.passwordText.text = ""
                             
                             OTMClient.sharedInstance().getUser({ (result, error) -> Void in
+                                guard error == nil else {
+                                    self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
+                                    return
+                                }
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                     if let controller = self.storyboard?.instantiateViewControllerWithIdentifier("rootTabBarController") {
                                         self.presentViewController(controller, animated: true, completion: nil)
@@ -58,6 +66,13 @@ class LoginViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func setLoginEnabled(enabled: Bool) {
+        usernameText.enabled = enabled
+        passwordText.enabled = enabled
+        loginButton.enabled = enabled
+        loginButton.alpha = enabled ? 1 : 0.5
     }
     
     @IBAction func signUpButton(sender: UIButton) {
