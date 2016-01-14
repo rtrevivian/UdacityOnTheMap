@@ -21,6 +21,7 @@
 		796C5D151BD68EE300DC3EBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 796C5D141BD68EE300DC3EBB /* Assets.xcassets */; };
 		796C5D181BD68EE300DC3EBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796C5D161BD68EE300DC3EBB /* LaunchScreen.storyboard */; };
 		796C5D231BD68EE300DC3EBB /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C5D221BD68EE300DC3EBB /* On_The_MapTests.swift */; };
+		797EEBAA1C47F1F000B901E0 /* OTMStudents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEBA91C47F1F000B901E0 /* OTMStudents.swift */; };
 		798AA2191BD6A418004A455F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AA2181BD6A418004A455F /* PostViewController.swift */; };
 		79906F1E1C3F5AA70055074F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79906F1D1C3F5AA70055074F /* ViewController.swift */; };
 		79E0BCE71BD697F3007B9BBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E0BCE61BD697F3007B9BBF /* LoginViewController.swift */; };
@@ -57,6 +58,7 @@
 		796C5D1E1BD68EE300DC3EBB /* On The MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796C5D221BD68EE300DC3EBB /* On_The_MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapTests.swift; sourceTree = "<group>"; };
 		796C5D241BD68EE300DC3EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		797EEBA91C47F1F000B901E0 /* OTMStudents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMStudents.swift; sourceTree = "<group>"; };
 		798AA2181BD6A418004A455F /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostViewController.swift; path = Controller/PostViewController.swift; sourceTree = "<group>"; };
 		79906F1D1C3F5AA70055074F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controller/ViewController.swift; sourceTree = "<group>"; };
 		79E0BCE61BD697F3007B9BBF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controller/LoginViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				7968449F1C44082200DA9A99 /* OTMClient.swift */,
 				796844A01C44082200DA9A99 /* OTMConstants.swift */,
 				796844A11C44082200DA9A99 /* OTMConvience.swift */,
+				797EEBA91C47F1F000B901E0 /* OTMStudents.swift */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				796844931C44042600DA9A99 /* StudentInformation.swift in Sources */,
 				79906F1E1C3F5AA70055074F /* ViewController.swift in Sources */,
 				796844A21C44082200DA9A99 /* OTMClient.swift in Sources */,
+				797EEBAA1C47F1F000B901E0 /* OTMStudents.swift in Sources */,
 				796844A91C44083200DA9A99 /* Account.swift in Sources */,
 				79E0BCE71BD697F3007B9BBF /* LoginViewController.swift in Sources */,
 				796844AC1C44083200DA9A99 /* User.swift in Sources */,

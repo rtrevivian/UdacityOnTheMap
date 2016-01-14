@@ -10,17 +10,15 @@ import Foundation
 import UIKit
 import MapKit
 
-class StudentInformation: NSObject, MKAnnotation {
+struct StudentInformation {
     
     var title: String? {
-        return firstName
+        return firstName! + " " + lastName!
     }
     
     var subtitle: String? {
         return mediaURL
     }
-    
-    var coordinate: CLLocationCoordinate2D
     
     var createdAt: String?
     var firstName: String?
@@ -34,6 +32,8 @@ class StudentInformation: NSObject, MKAnnotation {
     var latitude: Double?
     var longitude: Double?
     
+    var annotation: MKAnnotation!
+    
     init(_ data: NSDictionary) {
         
         createdAt = data[StudentInformationKeys.createdAt] as? String
@@ -45,13 +45,13 @@ class StudentInformation: NSObject, MKAnnotation {
         uniqueKey = data[StudentInformationKeys.uniqueKey] as? String
         updatedAt = data[StudentInformationKeys.updatedAt] as? String
         
-        
         latitude = data[StudentInformationKeys.latitude] as? Double
         longitude = data[StudentInformationKeys.longitude] as? Double
-        coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         
-        super.init()
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         
+        self.annotation = annotation
     }
     
 }

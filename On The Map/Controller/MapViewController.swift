@@ -49,16 +49,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func load() {
         setEnabled(false)
-        OTMClient.sharedInstance().getStudentLocations { (error) -> Void in
+        OTMStudents.getStudentLocations { (error) -> Void in
             self.setEnabled(true)
             guard error == nil else {
                 self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                 return
             }
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.mapView.removeAnnotations(self.studentLocations)
-                self.studentLocations = OTMClient.sharedInstance().studentInformations
-                self.mapView.addAnnotations(self.studentLocations)
+                for i in self.studentLocations {
+                    self.mapView.removeAnnotation(i.annotation)
+                }
+                self.studentLocations = OTMStudents.studentInformations
+                for b in self.studentLocations {
+                    self.mapView.addAnnotation(b.annotation)
+                }
             })
         }
     }

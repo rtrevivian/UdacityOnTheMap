@@ -14,8 +14,6 @@ class OTMClient {
     
     var otmSession: OTMSession!
     var user: User!
-    var studentInformations = [StudentInformation]()
-    var studentInformation: StudentInformation!
     
     // MARK: GET
     

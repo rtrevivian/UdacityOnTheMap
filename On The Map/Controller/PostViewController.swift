@@ -89,7 +89,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
                 let geocodedLocation = placemark.location!
                 centerMapOnLocation(geocodedLocation)
                 
-                OTMClient.sharedInstance().studentInformation = StudentInformation([
+                OTMStudents.studentInformation = StudentInformation([
                     "firstName": OTMClient.sharedInstance().user.firstName,
                     "lastName": OTMClient.sharedInstance().user.lastName,
                     "mapString": mapString,
@@ -97,7 +97,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
                     "longitude": geocodedLocation.coordinate.longitude
                 ])
                 
-                mapView.addAnnotation(OTMClient.sharedInstance().studentInformation)
+                mapView.addAnnotation(OTMStudents.studentInformation.annotation)
                 editing = true
             }
         }
@@ -110,10 +110,10 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     
     func submit() {
         submitButton.enabled = false
-        OTMClient.sharedInstance().studentInformation.mediaURL = inputText.text!
+        OTMStudents.studentInformation.mediaURL = inputText.text!
         inputText.text = ""
         setMapEditing(false)
-        OTMClient.sharedInstance().postStudentLocation { (error) -> Void in
+        OTMStudents.postStudentLocation { (error) -> Void in
             guard error == nil else {
                 self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                 return

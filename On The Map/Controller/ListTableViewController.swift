@@ -33,11 +33,11 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return OTMClient.sharedInstance().studentInformations.count
+        return OTMStudents.studentInformations.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let studentLocation = OTMClient.sharedInstance().studentInformations[indexPath.row]
+        let studentLocation = OTMStudents.studentInformations[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.imageView?.image = UIImage(named: "pin")
         cell.textLabel?.text = studentLocation.title
@@ -46,13 +46,13 @@ class ListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        openURL(OTMClient.sharedInstance().studentInformations[indexPath.row].mediaURL!)
+        openURL(OTMStudents.studentInformations[indexPath.row].mediaURL!)
     }
     
     // MARK: - Methods
     
     func load() {
-        OTMClient.sharedInstance().getStudentLocations { (error) -> Void in
+        OTMStudents.getStudentLocations { (error) -> Void in
             guard error == nil else {
                 self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                 return
