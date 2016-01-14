@@ -35,7 +35,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
         inputText.becomeFirstResponder()
         inputText.becomeFirstResponder()
         
-        activityIndicator.hidden = true
+        setMapEditing(true)
         
         editing = false
     }
@@ -71,17 +71,14 @@ class PostViewController: UIViewController, UITextFieldDelegate {
         inputText.text = ""
         findButton.enabled = false
         
-        activityIndicator.startAnimating()
-        activityIndicator.hidden = false
+        setMapEditing(false)
         
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(mapString, completionHandler: didCompleteGeocoding)
     }
     
     func didCompleteGeocoding(placemarks: [CLPlacemark]?, error: NSError?) {
-        activityIndicator.stopAnimating()
-        activityIndicator.hidden = true
-        
+        setMapEditing(true)
         guard error == nil else {
             presentSimpleAlert("Error Geocoding", message: "The supplied string could not be Geocoded")
             return
@@ -115,8 +112,21 @@ class PostViewController: UIViewController, UITextFieldDelegate {
         submitButton.enabled = false
         OTMClient.sharedInstance().studentInformation.mediaURL = inputText.text!
         inputText.text = ""
+        setMapEditing(false)
         OTMClient.sharedInstance().postStudentLocation { (error) -> Void in
+            guard error == nil else {
+                self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
+                return
+            }
             self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func setMapEditing(enabled: Bool) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.activityIndicator.hidden = enabled
+            enabled ? self.activityIndicator.stopAnimating() : self.activityIndicator.startAnimating()
+            self.mapView.alpha = enabled ? 1 : 0.5
         }
     }
 

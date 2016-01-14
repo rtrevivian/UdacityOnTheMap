@@ -46,15 +46,14 @@ class LoginViewController: UIViewController {
                                 self.presentSimpleAlert("Login failed", message: message)
                             }
                         } else {
-                            self.usernameText.text = ""
-                            self.passwordText.text = ""
-                            
                             OTMClient.sharedInstance().getUser({ (result, error) -> Void in
                                 guard error == nil else {
                                     self.presentSimpleAlert(error!.localizedDescription, message: OTMClient.ErrorMessages.tryAgain)
                                     return
                                 }
                                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    self.usernameText.text = ""
+                                    self.passwordText.text = ""
                                     if let controller = self.storyboard?.instantiateViewControllerWithIdentifier("rootTabBarController") {
                                         self.presentViewController(controller, animated: true, completion: nil)
                                     }
