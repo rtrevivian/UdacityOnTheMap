@@ -24,7 +24,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         addNavigation()
         mapView.delegate = self
         tapGesture = UITapGestureRecognizer(target: self, action: "tap:")
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,6 +36,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         selectedAnnotation = view
+        selectedAnnotation.canShowCallout = true
+        print(selectedAnnotation.canShowCallout)
         view.addGestureRecognizer(tapGesture)
     }
     
@@ -68,9 +69,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func tap(sender: UITapGestureRecognizer) {
-        if let annotation = sender.view as? MKPinAnnotationView {
-            if let studentLocation = annotation.annotation as? StudentInformation {
-                openURL(studentLocation.mediaURL!)
+        if let view = sender.view as? MKPinAnnotationView {
+            if let annotation = view.annotation {
+                if let subtitle = annotation.subtitle {
+                    openURL(subtitle!)
+                }
             }
         }
     }

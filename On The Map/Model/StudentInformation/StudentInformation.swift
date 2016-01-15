@@ -49,6 +49,8 @@ struct StudentInformation {
         longitude = data[StudentInformationKeys.longitude] as? Double
         
         let annotation = MKPointAnnotation()
+        annotation.title = title
+        annotation.subtitle = subtitle
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         
         self.annotation = annotation
